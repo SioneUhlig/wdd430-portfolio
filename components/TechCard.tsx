@@ -1,10 +1,10 @@
-interface SkillCardProps {
+interface TechCardProps {
   skill: string;
   level: string;
   description: string;
 }
 
-export default function SkillCard({ skill, level, description }: SkillCardProps) {
+export default function TechCard({ skill, level, description }: TechCardProps) {
   return (
     <div className="p-6 rounded-lg border border-slate-700 bg-slate-900 shadow-sm">
       <div className="flex justify-between items-center mb-2">
