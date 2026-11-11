@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { connection } from 'next/server';
 import { getProjects } from '@/lib/projects-db';
 
 export default async function ProjectsByTypePage({
@@ -7,6 +8,7 @@ export default async function ProjectsByTypePage({
 }: {
   params: Promise<{ type: string }>;
 }) {
+  await connection();
   const { type } = await params;
 
   if (type !== 'school' && type !== 'opensource') {
