@@ -1,28 +1,27 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { connection } from 'next/server';
 import { getProjects } from '@/lib/projects-db';
+import ProjectItems from '@/components/ProjectItems';
+import ProjectListSkeleton from '@/components/ProjectListSkeleton';
 
-export default async function ProjectsPage() {
+async function AllProjectList() {
   await connection();
   const projects = await getProjects();
+  return <ProjectItems projects={projects} />;
+}
 
+export default function ProjectsPage() {
   return (
     <main className="max-w-4xl mx-auto p-8">
       <h1 className="text-3xl font-bold mb-4">All Projects</h1>
       <nav className="flex gap-4 mb-6">
-        <Link href="/projects/school" className="text-blue-600 underline">School</Link>
-        <Link href="/projects/opensource" className="text-blue-600 underline">Open Source</Link>
+        <Link href="/projects/school" className="text-sky-400 underline">School</Link>
+        <Link href="/projects/opensource" className="text-sky-400 underline">Open Source</Link>
       </nav>
-      <ul className="space-y-4">
-        {projects.map((p) => (
-          <li key={p.id} className="border rounded p-4">
-            <h2 className="text-xl font-semibold">{p.title}</h2>
-            <p>{p.description}</p>
-            <p className="text-sm text-gray-500">{p.technologies?.join(', ')}</p>
-            {p.link && <a href={p.link} className="text-blue-600 underline">View project</a>}
-          </li>
-        ))}
-      </ul>
+      <Suspense fallback={<ProjectListSkeleton />}>
+        <AllProjectList />
+      </Suspense>
     </main>
   );
 }
