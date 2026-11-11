@@ -16,7 +16,7 @@ My personal portfolio site built with Next.js (App Router), TypeScript and Tailw
 - `app/page.tsx` – home page with project list
 - `app/about/page.tsx` – about page with skills
 - `app/api/hello/route.ts` – simple API route returning JSON
-- `components/` – Header, Footer, ProjectCard, ProjectList, SkillCard (custom component)
+- `components/` – Header, Footer, ProjectCard, ProjectList, TechCard (custom component)
 
 ## Run Locally
 
